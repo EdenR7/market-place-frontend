@@ -13,8 +13,12 @@ function ProductDetailsPage() {
   useEffect(() => {
     async function getProduct(url) {
       try {
-        const { data } = await axios.get(url);
-        setProduct(data);
+        const { data, status } = await axios.get(url);
+        if (status === 200) {
+          setProduct(data);
+        } else {
+          throw new Error(status);
+        }
       } catch (err) {
         // err.response && err.response.status === 404 && navigate("/NotFound");
         err.response && navigate("/NotFound");

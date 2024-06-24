@@ -5,7 +5,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import HomePage from "./pages/HomePage";
 import { Link } from "react-router-dom";
-import NavbBar from "./components/NavbBar";
+import NavbBar from "./components/general/NavbBar";
 
 function App() {
   return (

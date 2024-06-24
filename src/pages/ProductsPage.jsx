@@ -4,6 +4,7 @@ import useFetch from "../hooks/useFetch";
 import { data } from "browserslist";
 import ProductList from "../components/ProductPage/ProductList";
 import { Outlet } from "react-router";
+import CreateProduct from "../components/general/CreateProduct";
 const PRODUCTS_URL = "http://localhost:3000/api/product";
 
 function ProductsPage() {
@@ -32,6 +33,7 @@ function ProductsPage() {
         <h2 className=" font-bold text-2xl">Our Products :</h2>
         <ProductList products={products} setProducts={setProducts} />
       </div>
+      <CreateProduct />
       <Outlet />
     </>
   );
