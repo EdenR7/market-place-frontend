@@ -11,10 +11,72 @@ import { useSearchParams, useLocation } from "react-router-dom";
 import Button from "../components/ui/Button";
 const PRODUCTS_URL = "http://localhost:3000/api/product/";
 
+export function FilterProducts(props) {
+  const { setSearchParams, minPriceSearch, maxPriceSearch, nameSearch } = props;
+  return (
+    <div>
+      <div>
+        <label htmlFor="filter-minPrice">Min Price :</label>
+        <input
+          value={minPriceSearch}
+          onChange={(ev) => {
+            setSearchParams((prev) => {
+              prev.set("minPrice", ev.target.value);
+              prev.set("skip", 0);
+              return prev;
+            });
+          }}
+          type="number"
+          id="filter-minPrice"
+          placeholder=""
+          className="border px-2 py-1 rounded-sm"
+        />
+      </div>
+      <div>
+        <div>
+          <label htmlFor="filter-maxPrice">Max Price :</label>
+          <input
+            value={maxPriceSearch}
+            onChange={(ev) => {
+              setSearchParams((prev) => {
+                prev.set("maxPrice", ev.target.value);
+                prev.set("skip", 0);
+                return prev;
+              });
+            }}
+            type="number"
+            id="filter-maxPrice"
+            placeholder=""
+            className="border px-2 py-1 rounded-sm"
+          />
+        </div>
+      </div>
+      <div>
+        <div>
+          <label htmlFor="filter-name">Name:</label>
+          <input
+            type="text"
+            value={nameSearch}
+            onChange={(ev) => {
+              setSearchParams((prev) => {
+                prev.set("name", ev.target.value);
+                prev.set("skip", 0);
+                return prev;
+              });
+            }}
+            id="filter-name"
+            placeholder=""
+            className="border px-2 py-1 rounded-sm"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ProductsPage() {
-  //Loader, Abort
+  //Loader, Abort, debounce, add, edit, delete
   const [products, setProducts] = useState([]);
-  // const [curPage, setCurPage] = useState(1);
 
   const [searchParams, setSearchParams] = useSearchParams({
     name: "",
@@ -27,21 +89,18 @@ function ProductsPage() {
   const maxPriceSearch = searchParams.get("maxPrice");
   const curPage = Number(searchParams.get("skip"));
   const location = useLocation();
-  console.log(location.search);
 
   const totalProducts = useRef(0);
 
   const numOfPages = totalProducts.current
     ? Math.ceil(totalProducts.current / 6)
     : 0;
-  // `?skip=${curPage - 1}`
   useEffect(() => {
     async function getProducts() {
       try {
         const { data } = await axios.get(PRODUCTS_URL + location.search);
         const total = await axios.get(PRODUCTS_URL + "count" + location.search);
         totalProducts.current = total.data.count;
-        console.log(totalProducts);
         setProducts(data);
       } catch (err) {
         throw err;
@@ -66,7 +125,13 @@ function ProductsPage() {
   return (
     <>
       <div className="px-12 py-12 flex flex-col gap-8 font-montserrat">
-        <div>
+        <FilterProducts
+          setSearchParams={setSearchParams}
+          nameSearch={nameSearch}
+          minPriceSearch={minPriceSearch}
+          maxPriceSearch={maxPriceSearch}
+        />
+        {/* <div>
           <div>
             <label htmlFor="filter-minPrice">Min Price :</label>
             <input
@@ -74,6 +139,7 @@ function ProductsPage() {
               onChange={(ev) => {
                 setSearchParams((prev) => {
                   prev.set("minPrice", ev.target.value);
+                  prev.set("skip", 0);
                   return prev;
                 });
               }}
@@ -83,43 +149,46 @@ function ProductsPage() {
               className="border px-2 py-1 rounded-sm"
             />
           </div>
-        </div>
-        <div>
           <div>
-            <label htmlFor="filter-maxPrice">Max Price :</label>
-            <input
-              value={maxPriceSearch}
-              onChange={(ev) => {
-                setSearchParams((prev) => {
-                  prev.set("maxPrice", ev.target.value);
-                  return prev;
-                });
-              }}
-              type="number"
-              id="filter-maxPrice"
-              placeholder=""
-              className="border px-2 py-1 rounded-sm"
-            />
+            <div>
+              <label htmlFor="filter-maxPrice">Max Price :</label>
+              <input
+                value={maxPriceSearch}
+                onChange={(ev) => {
+                  setSearchParams((prev) => {
+                    prev.set("maxPrice", ev.target.value);
+                    prev.set("skip", 0);
+                    return prev;
+                  });
+                }}
+                type="number"
+                id="filter-maxPrice"
+                placeholder=""
+                className="border px-2 py-1 rounded-sm"
+              />
+            </div>
           </div>
-        </div>
-        <div>
           <div>
-            <label htmlFor="filter-name">Name:</label>
-            <input
-              type="text"
-              value={nameSearch}
-              onChange={(ev) => {
-                setSearchParams((prev) => {
-                  prev.set("name", ev.target.value);
-                  return prev;
-                });
-              }}
-              id="filter-name"
-              placeholder=""
-              className="border px-2 py-1 rounded-sm"
-            />
+            <div>
+              <label htmlFor="filter-name">Name:</label>
+              <input
+                type="text"
+                value={nameSearch}
+                onChange={(ev) => {
+                  setSearchParams((prev) => {
+                    prev.set("name", ev.target.value);
+                    prev.set("skip", 0);
+                    return prev;
+                  });
+                }}
+                id="filter-name"
+                placeholder=""
+                className="border px-2 py-1 rounded-sm"
+              />
+            </div>
           </div>
-        </div>
+        </div> */}
+
         <h2 className=" font-bold text-2xl">Our Products :</h2>
         <ProductList
           searchParams={searchParams}
