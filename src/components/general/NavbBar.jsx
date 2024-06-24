@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { IoHomeOutline } from "react-icons/io5";
+import { CiShop } from "react-icons/ci";
 
 function NavbBar() {
   const location = useLocation();
-  console.log(location);
   const currentPath = location.pathname;
 
   return (
@@ -12,7 +13,10 @@ function NavbBar() {
         <h3 className=" text-primary-500 font-bold">MARKET PLACE</h3>
         <ul className="flex gap-8">
           <li className=" transition hover:text-primary-500 hover:font-semibold">
-            <Link to={"/"}>
+            <Link className="flex items-center gap-1" to={"/"}>
+              <span>
+                <IoHomeOutline />
+              </span>
               <span
                 className={
                   currentPath === "/"
@@ -22,11 +26,13 @@ function NavbBar() {
               >
                 Home
               </span>{" "}
-              <span></span>
             </Link>
           </li>
           <li className=" transition hover:text-primary-500 hover:font-semibold">
-            <Link to={"/product"}>
+            <Link className="flex items-center gap-1" to={"/product"}>
+              <span>
+                <CiShop />
+              </span>
               <span
                 className={
                   currentPath.startsWith("/product")
@@ -36,7 +42,6 @@ function NavbBar() {
               >
                 Products
               </span>{" "}
-              <span></span>
             </Link>
           </li>
         </ul>

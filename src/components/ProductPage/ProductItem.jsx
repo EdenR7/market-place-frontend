@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "../ui/Button";
+import { AiOutlineProduct } from "react-icons/ai";
 
 function ProductItem(props) {
   const { product, setProducts } = props;
@@ -14,14 +15,16 @@ function ProductItem(props) {
           <div className="flex justify-between">
             <h3 className=" font-semibold text-lg">{product.name}</h3>
             <Link to={`/product/${product._id}`}>
-              <Button inverse>Product Page</Button>
+              <Button inverse>
+                <AiOutlineProduct />
+              </Button>
             </Link>
           </div>
           <p className="mt-10">{product.category}</p>
         </div>
         <div className=" text-right">
           <h4 className=" font-semibold">
-            <span className="  underline">Total:</span>{" "}
+            <span className="  underline decoration-primary-500">Total:</span>{" "}
             <span>{`${product.price}$`}</span>
           </h4>
         </div>
