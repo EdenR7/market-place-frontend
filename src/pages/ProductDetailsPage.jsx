@@ -20,7 +20,6 @@ function ProductDetailsPage() {
           throw new Error(status);
         }
       } catch (err) {
-        // err.response && err.response.status === 404 && navigate("/NotFound");
         err.response && navigate("/NotFound");
         throw err;
       }
@@ -29,7 +28,11 @@ function ProductDetailsPage() {
   }, []);
   return (
     <>
-      <Modal buttonContext={<Link to={"/product"}>Close</Link>}>
+      <Modal
+        btn={{
+          context: <Link to={"/product"}>Close</Link>,
+        }}
+      >
         <div>
           <h3>{product.name}</h3>
           <p>{product.category}</p>
