@@ -9,7 +9,7 @@ function NavbBar() {
 
   return (
     <div>
-      <nav className="flex justify-between px-12 py-6 shadow-md ">
+      <nav className=" top-0 left-0 fixed z-50 w-full flex justify-between px-12 py-6 shadow-md ">
         <h3 className=" text-primary-500 font-bold">MARKET PLACE</h3>
         <ul className="flex gap-8">
           <li className=" transition hover:text-primary-500 hover:font-semibold">

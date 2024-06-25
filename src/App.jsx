@@ -6,6 +6,8 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import HomePage from "./pages/HomePage";
 import { Link } from "react-router-dom";
 import NavbBar from "./components/general/NavbBar";
+import CreateProduct from "./pages/CreateProductPage";
+import CreateProductPage from "./pages/CreateProductPage";
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
           <Route index element={<ProductsPage />} />
           <Route path=":productId" element={<ProductsPage />}>
             <Route index element={<ProductDetailsPage />} />
+          </Route>
+          <Route path="create" element={<ProductsPage />}>
+            <Route index element={<CreateProductPage />} />
           </Route>
         </Route>
         <Route path="/*" element={<NotFoundPage />} />
