@@ -10,6 +10,13 @@ import CreateProduct from "./pages/CreateProductPage";
 import CreateProductPage from "./pages/CreateProductPage";
 
 function App() {
+  // Test the filter by categories
+  // Create 2 forms, Create the user Page that contain the sign in and register
+  // define input component
+  // Add a submit button option
+  // make sure that every thing is responsive
+  // add placeholder imgs
+  // 
   return (
     <>
       <NavbBar />
