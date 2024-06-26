@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "../ui/Button";
+import { CATEGORIES_LIST } from "../../utils/url_constants";
 
 export function FilterProducts(props) {
   const {
@@ -8,6 +9,8 @@ export function FilterProducts(props) {
     maxPriceSearch,
     nameSearch,
     inStock,
+    categoriesSearch,
+    categoriesSearchArr,
   } = props;
 
   function handledFilter(ev) {
@@ -28,12 +31,30 @@ export function FilterProducts(props) {
       });
     }
   }
+  function handleListBoxFilter(ev) {
+    // get the name of the category
+    const inputName = ev.target.name;
+    // get if the checkBox checked
+    const checked = ev.target.checked;
+    // cheked : insert to the array, else : remove
+    const newCategoriesArr = checked
+      ? [...categoriesSearchArr, inputName]
+      : categoriesSearchArr.filter((category) => category !== inputName);
+    // fix the problem of insert "" to the array
+    console.log(newCategoriesArr);
+    setSearchParams((prev) => {
+      prev.set("skip", 0);
+      prev.set("categories", newCategoriesArr.join(","));
+      return prev;
+    });
+  }
   function resetFilters() {
     setSearchParams((prev) => {
       prev.set("name", "");
       prev.set("minPrice", "");
       prev.set("maxPrice", "");
       prev.set("inStock", "false");
+      prev.set("categories", "");
       return prev;
     });
   }
@@ -87,6 +108,32 @@ export function FilterProducts(props) {
               className="border px-2 py-1 rounded-sm max-w-20 cursor-pointer"
             />
           </div>
+        </div>
+        <div className=" my-4 flex flex-col gap-4">
+          <label>Select Categories:</label>
+          <ul className=" grid grid-cols-2 gap-x-8 gap-y-2">
+            {CATEGORIES_LIST.map((category) => {
+              return (
+                <li key={category} className=" flex gap-2 items-center">
+                  <input
+                    checked={categoriesSearchArr?.includes(category)}
+                    type="checkbox"
+                    id={`${category}FilterOption`}
+                    name={category}
+                    value={category}
+                    onChange={handleListBoxFilter}
+                    className=" cursor-pointer"
+                  />
+                  <label
+                    htmlFor={`${category}FilterOption`}
+                    className=" cursor-pointer"
+                  >
+                    {category}
+                  </label>
+                </li>
+              );
+            })}
+          </ul>
         </div>
         <Button onClick={resetFilters}>RESET FILTERS</Button>
       </div>

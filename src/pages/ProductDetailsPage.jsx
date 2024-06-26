@@ -10,6 +10,10 @@ function ProductDetailsPage() {
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
 
+  function navToPrevPage() {
+    navigate(-1);
+  }
+
   useEffect(() => {
     async function getProduct(url) {
       try {
@@ -30,7 +34,10 @@ function ProductDetailsPage() {
     <>
       <Modal
         btn={{
-          context: <Link to={"/product"}>Close</Link>,
+          context: "Close",
+          onClick: () => {
+            navToPrevPage();
+          },
         }}
       >
         <div>

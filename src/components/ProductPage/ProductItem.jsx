@@ -20,7 +20,19 @@ function ProductItem(props) {
               </Button>
             </Link>
           </div>
-          <p className="mt-10">{product.category}</p>
+          <div className="mt-4 ">
+            <h4 className="underline">Categories:</h4>
+            <ul className="flex flex-wrap">
+              {product.categories.map((category, index) => {
+                return (
+                  <li className="mr-2" key={category}>
+                    {category}
+                    {index + 1 === product.categories.length ? "" : ","}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
         <div className=" text-right">
           <h4 className=" font-semibold">
