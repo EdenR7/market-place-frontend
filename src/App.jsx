@@ -11,9 +11,9 @@ import CreateProductPage from "./pages/CreateProductPage";
 import UserPage from "./pages/UserPage";
 
 function App() {
-  // Create 2 forms, Create the user Page that contain the sign in and register
-  // define input component
+  // snackBar
   // Add a submit button option
+  // create
   // add placeholder imgs
   return (
     <>

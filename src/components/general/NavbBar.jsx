@@ -11,7 +11,7 @@ function NavbBar() {
   return (
     <nav className=" top-0 left-0 fixed z-50 w-full flex justify-between px-6 py-6 shadow-md bg-white break-400px:px-12">
       <h3 className=" text-primary-500 font-bold">MARKET PLACE</h3>
-      <ul className="flex gap-4 break-500px:gap-8 items-center">
+      <ul className="flex gap-4 break-600px:gap-8 items-center">
         <li className=" transition hover:text-primary-500 hover:font-semibold">
           <Link className="flex items-center gap-1" to={"/"}>
             <span>
@@ -26,7 +26,7 @@ function NavbBar() {
                 currentPath === "/"
                   ? "font-semibold underline decoration-primary-500"
                   : ""
-              } hidden break-500px:inline-block `}
+              } hidden break-600px:inline-block `}
             >
               Home
             </span>{" "}
@@ -48,7 +48,7 @@ function NavbBar() {
                 currentPath.startsWith("/product")
                   ? "font-semibold underline decoration-primary-500"
                   : ""
-              } hidden break-500px:inline-block`}
+              } hidden break-600px:inline-block`}
             >
               Products
             </span>{" "}
@@ -58,9 +58,23 @@ function NavbBar() {
           <Link className={` flex items-center gap-1`} to={"/user"}>
             <span>
               {" "}
-              <FaUser />
+              <FaUser
+                className={`${
+                  currentPath.startsWith("/user")
+                    ? "text-primary-500"
+                    : " text-sm"
+                } `}
+              />
             </span>
-            <span></span>
+            <span
+              className={`${
+                currentPath.startsWith("/user")
+                  ? "font-semibold underline decoration-primary-500"
+                  : ""
+              } hidden break-600px:inline-block`}
+            >
+              Products
+            </span>{" "}
           </Link>
         </li>
       </ul>

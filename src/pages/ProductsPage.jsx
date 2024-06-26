@@ -14,7 +14,7 @@ import { PRODUCTS_URL } from "../utils/url_constants";
 import { FilterProducts } from "../components/ProductPage/FilterProduct";
 
 function ProductsPage() {
-  // edit, delete
+  // edit, delete snackbar
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 

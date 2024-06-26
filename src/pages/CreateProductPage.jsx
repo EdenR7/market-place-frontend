@@ -8,7 +8,6 @@ import SnackBar from "../components/ui/SnackBar";
 const PRODUCTS_URL = "http://localhost:3000/api/product/";
 
 function CreateProductPage() {
-  // Snack bars
   const navigate = useNavigate();
   const [displayErrorSnack, setDisplayErrorSnack] = useState(false);
   const [newProduct, setNewProduct] = useState({
