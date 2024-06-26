@@ -9,9 +9,10 @@ function ProductItem(props) {
     <>
       <li
         key={product._id}
-        className=" bg-white p-10 rounded-lg shadow-lg max-w-md w-80 break-500px:w-400 h-72 relative flex flex-col justify-between"
+        className=" bg-white pb-10 rounded-lg shadow-lg max-w-md w-80 break-500px:w-400 h-400 relative flex flex-col justify-between overflow-hidden"
       >
-        <div>
+        <img src="https://dummyimage.com/400x200" alt="Placeholder Image" />
+        <div className="px-10 pt-4 z-50">
           <div className="flex justify-between">
             <h3 className=" font-semibold text-lg">{product.name}</h3>
             <Link to={`/product/${product._id}`}>
@@ -34,7 +35,7 @@ function ProductItem(props) {
             </ul>
           </div>
         </div>
-        <div className=" text-right">
+        <div className=" text-right px-10">
           <h4 className=" font-semibold">
             <span className="  underline decoration-primary-500">Total:</span>{" "}
             <span>{`${product.price}$`}</span>

@@ -40,7 +40,7 @@ function ProductDetailsPage() {
           },
         }}
       >
-        <div>
+        <div >
           <h3>{product.name}</h3>
           <p>{product.category}</p>
           <div className="">

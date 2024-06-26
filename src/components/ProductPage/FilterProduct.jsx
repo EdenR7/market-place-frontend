@@ -3,18 +3,14 @@ import Button from "../ui/Button";
 import { IoIosSearch } from "react-icons/io";
 
 import { CATEGORIES_LIST } from "../../utils/url_constants";
-import SingleRangeSlider from "./RangeSlider";
 import PriceRangeSlider from "./RangeSlider";
 
 export function FilterProducts(props) {
   const {
     searchParams,
     setSearchParams,
-    minPriceSearch,
-    maxPriceSearch,
     nameSearch,
     inStock,
-    categoriesSearch,
     categoriesSearchArr,
   } = props;
 
@@ -37,11 +33,8 @@ export function FilterProducts(props) {
     }
   }
   function handleListBoxFilter(ev) {
-    // get the name of the category
     const inputName = ev.target.name;
-    // get if the checkBox checked
     const checked = ev.target.checked;
-    // cheked : insert to the array, else : remove
     const newCategoriesArr = checked
       ? [...categoriesSearchArr, inputName]
       : categoriesSearchArr.filter((category) => category !== inputName);

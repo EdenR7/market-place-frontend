@@ -5,6 +5,7 @@ import axios from "axios";
 import Modal from "../components/ui/Modal";
 import { Link, useNavigate } from "react-router-dom";
 import SnackBar from "../components/ui/SnackBar";
+import { CATEGORIES_LIST } from "../utils/url_constants";
 const PRODUCTS_URL = "http://localhost:3000/api/product/";
 
 function CreateProductPage() {
@@ -12,19 +13,32 @@ function CreateProductPage() {
   const [displayErrorSnack, setDisplayErrorSnack] = useState(false);
   const [newProduct, setNewProduct] = useState({
     name: "",
-    category: "",
+    categories: [],
     quantity: "",
     price: "",
   });
   function navToPrevPage() {
     navigate(-1);
   }
+  function handleListBoxFilter(ev) {
+    const inputName = ev.target.name;
+    const checked = ev.target.checked;
+    const updateCategories = checked
+      ? [...newProduct.categories, inputName]
+      : newProduct.categories.filter((category) => category !== inputName);
+    setNewProduct((prev) => {
+      return {
+        ...prev,
+        categories: updateCategories,
+      };
+    });
+  }
   async function addProduct(product) {
     try {
       const { data: newP } = await axios.post(PRODUCTS_URL, product);
       setNewProduct({
         name: "",
-        category: "",
+        categories: [],
         quantity: "",
         price: "",
       });
@@ -48,12 +62,7 @@ function CreateProductPage() {
           onSubmit={(ev) => {
             ev.preventDefault();
             setDisplayErrorSnack(false);
-            addProduct({
-              ...newProduct,
-              category:
-                newProduct.category[0].toUpperCase() +
-                newProduct.category.slice(1),
-            });
+            addProduct(newProduct);
           }}
         >
           <input
@@ -71,20 +80,30 @@ function CreateProductPage() {
             placeholder="Product Label"
             className="border px-6 py-2 rounded-sm"
           />
-          <input
-            onChange={(ev) => {
-              setNewProduct((prev) => {
-                return {
-                  ...prev,
-                  category: ev.target.value,
-                };
-              });
-            }}
-            value={newProduct.category}
-            type="text"
-            placeholder="Categories"
-            className="border px-6 py-2 rounded-sm"
-          />
+          <h3 className=" font-semibold">Categories : </h3>
+          <ul className=" grid grid-cols-2 gap-x-8 gap-y-2 px-2">
+            {CATEGORIES_LIST.map((category) => {
+              return (
+                <li key={category} className=" flex gap-2 items-center">
+                  <input
+                    checked={newProduct.categories.includes(category)}
+                    type="checkbox"
+                    id={`${category}FilterOption`}
+                    name={category}
+                    value={category}
+                    onChange={handleListBoxFilter}
+                    className=" cursor-pointer"
+                  />
+                  <label
+                    htmlFor={`${category}FilterOption`}
+                    className=" cursor-pointer"
+                  >
+                    {category}
+                  </label>
+                </li>
+              );
+            })}
+          </ul>
           <input
             onChange={(ev) => {
               setNewProduct((prev) => {
@@ -119,7 +138,7 @@ function CreateProductPage() {
       {displayErrorSnack ? (
         <SnackBar
           label="Error"
-          context="Error in operation freferfer frer"
+          context="Error in create operation (make sure all the fields are filled approprietly)"
           danger
           closeManually={true}
         ></SnackBar>
