@@ -9,7 +9,7 @@ function ProductItem(props) {
     <>
       <li
         key={product._id}
-        className=" bg-white p-10 rounded-lg shadow-lg max-w-md w-400 h-72 relative flex flex-col justify-between"
+        className=" bg-white p-10 rounded-lg shadow-lg max-w-md w-80 break-500px:w-400 h-72 relative flex flex-col justify-between"
       >
         <div>
           <div className="flex justify-between">

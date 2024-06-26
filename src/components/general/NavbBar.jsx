@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
+import { FaUser } from "react-icons/fa";
 import { CiShop } from "react-icons/ci";
 
 function NavbBar() {
@@ -8,39 +9,58 @@ function NavbBar() {
   const currentPath = location.pathname;
 
   return (
-    <nav className=" top-0 left-0 fixed z-50 w-full flex justify-between px-12 py-6 shadow-md bg-white">
+    <nav className=" top-0 left-0 fixed z-50 w-full flex justify-between px-6 py-6 shadow-md bg-white break-400px:px-12">
       <h3 className=" text-primary-500 font-bold">MARKET PLACE</h3>
-      <ul className="flex gap-8">
+      <ul className="flex gap-4 break-500px:gap-8 items-center">
         <li className=" transition hover:text-primary-500 hover:font-semibold">
           <Link className="flex items-center gap-1" to={"/"}>
             <span>
-              <IoHomeOutline />
+              <IoHomeOutline
+                className={
+                  currentPath === "/" ? "text-primary-500 text-lg" : ""
+                }
+              />
             </span>
             <span
-              className={
+              className={`${
                 currentPath === "/"
                   ? "font-semibold underline decoration-primary-500"
                   : ""
-              }
+              } hidden break-500px:inline-block `}
             >
               Home
             </span>{" "}
           </Link>
         </li>
         <li className=" transition hover:text-primary-500 hover:font-semibold">
-          <Link className="flex items-center gap-1" to={"/product"}>
+          <Link className={` flex items-center gap-1`} to={"/product"}>
             <span>
-              <CiShop />
+              <CiShop
+                className={
+                  currentPath.startsWith("/product")
+                    ? "text-primary-500 text-lg"
+                    : ""
+                }
+              />
             </span>
             <span
-              className={
+              className={`${
                 currentPath.startsWith("/product")
                   ? "font-semibold underline decoration-primary-500"
                   : ""
-              }
+              } hidden break-500px:inline-block`}
             >
               Products
             </span>{" "}
+          </Link>
+        </li>
+        <li className=" transition hover:text-primary-500 hover:font-semibold">
+          <Link className={` flex items-center gap-1`} to={"/user"}>
+            <span>
+              {" "}
+              <FaUser />
+            </span>
+            <span></span>
           </Link>
         </li>
       </ul>

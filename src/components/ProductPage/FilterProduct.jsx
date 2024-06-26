@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "../ui/Button";
+import { IoIosSearch } from "react-icons/io";
+
 import { CATEGORIES_LIST } from "../../utils/url_constants";
+import SingleRangeSlider from "./RangeSlider";
+import PriceRangeSlider from "./RangeSlider";
 
 export function FilterProducts(props) {
   const {
+    searchParams,
     setSearchParams,
     minPriceSearch,
     maxPriceSearch,
@@ -40,8 +45,6 @@ export function FilterProducts(props) {
     const newCategoriesArr = checked
       ? [...categoriesSearchArr, inputName]
       : categoriesSearchArr.filter((category) => category !== inputName);
-    // fix the problem of insert "" to the array
-    console.log(newCategoriesArr);
     setSearchParams((prev) => {
       prev.set("skip", 0);
       prev.set("categories", newCategoriesArr.join(","));
@@ -51,8 +54,8 @@ export function FilterProducts(props) {
   function resetFilters() {
     setSearchParams((prev) => {
       prev.set("name", "");
-      prev.set("minPrice", "");
-      prev.set("maxPrice", "");
+      prev.set("minPrice", 0);
+      prev.set("maxPrice", 2000);
       prev.set("inStock", "false");
       prev.set("categories", "");
       return prev;
@@ -60,63 +63,50 @@ export function FilterProducts(props) {
   }
   return (
     <>
-      <div className=" flex flex-col gap-2 items-center">
-        <div className=" flex gap-2">
-          <input
-            type="text"
-            value={nameSearch}
-            onChange={handledFilter}
-            id="filter-name"
-            name="name"
-            placeholder="Search ..."
-            className="border px-2 py-1 rounded-sm"
+      <div className=" grid gap-2 max-w-sm break-500px: mx-auto  2col:grid-cols-2 2col:max-w-4xl 2col:gap-x-16 3col:gap-x-32 3col:max-w-5xl 3col:mx-0">
+        <div>
+          <div className=" flex justify-between gap-2 w-full items-center">
+            <div className="flex justify-between items-center border rounded-md w-2/3 overflow-hidden px-4">
+              <input
+                type="text"
+                value={nameSearch ? nameSearch : ""}
+                onChange={handledFilter}
+                id="filter-name"
+                name="name"
+                placeholder="Search ..."
+                className="py-1 focus:outline-none"
+              />
+              <IoIosSearch className=" text-xl text-gray-400" />
+            </div>
+            <div className=" flex gap-2">
+              <label htmlFor="filter-inStock">Only in Stock:</label>
+              <input
+                checked={inStock === "true"}
+                onChange={handledFilter}
+                type="checkbox"
+                id="filter-inStock"
+                name="inStock"
+                className="border px-2 py-1 rounded-sm max-w-20 cursor-pointer"
+              />
+            </div>
+          </div>
+          <PriceRangeSlider
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
           />
         </div>
-        <div className=" flex gap-3 items-center">
-          <div className=" flex gap-2">
-            <label htmlFor="filter-minPrice">Min Price :</label>
-            <input
-              value={minPriceSearch}
-              onChange={handledFilter}
-              type="number"
-              id="filter-minPrice"
-              name="minPrice"
-              placeholder=""
-              className="border px-2 py-1 rounded-sm max-w-20"
-            />
-          </div>
-          <div className=" flex gap-2">
-            <label htmlFor="filter-maxPrice">Max Price :</label>
-            <input
-              value={maxPriceSearch}
-              onChange={handledFilter}
-              type="number"
-              id="filter-maxPrice"
-              name="maxPrice"
-              placeholder=""
-              className="border px-2 py-1 rounded-sm max-w-20"
-            />
-          </div>
-          <div className=" flex gap-2">
-            <label htmlFor="filter-inStock">Only in Stock:</label>
-            <input
-              checked={inStock === "true"}
-              onChange={handledFilter}
-              type="checkbox"
-              id="filter-inStock"
-              name="inStock"
-              className="border px-2 py-1 rounded-sm max-w-20 cursor-pointer"
-            />
-          </div>
-        </div>
-        <div className=" my-4 flex flex-col gap-4">
-          <label>Select Categories:</label>
+        <div className=" my-4 flex flex-col gap-4 2col:row-span-2	">
+          <label className=" font-semibold">Select Categories:</label>
           <ul className=" grid grid-cols-2 gap-x-8 gap-y-2">
             {CATEGORIES_LIST.map((category) => {
               return (
                 <li key={category} className=" flex gap-2 items-center">
                   <input
-                    checked={categoriesSearchArr?.includes(category)}
+                    checked={
+                      categoriesSearchArr
+                        ? categoriesSearchArr.includes(category)
+                        : false
+                    }
                     type="checkbox"
                     id={`${category}FilterOption`}
                     name={category}
@@ -135,7 +125,9 @@ export function FilterProducts(props) {
             })}
           </ul>
         </div>
-        <Button onClick={resetFilters}>RESET FILTERS</Button>
+        <Button onClick={resetFilters} className="max-w-40 mx-auto">
+          RESET FILTERS
+        </Button>
       </div>
     </>
   );

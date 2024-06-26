@@ -20,8 +20,8 @@ function ProductsPage() {
 
   const [searchParams, setSearchParams] = useSearchParams({
     name: "",
-    minPrice: "",
-    maxPrice: "",
+    minPrice: 0,
+    maxPrice: 2000,
     inStock: false,
     categories: "",
     skip: 0,
@@ -31,7 +31,9 @@ function ProductsPage() {
   const minPriceSearch = searchParams.get("minPrice");
   const maxPriceSearch = searchParams.get("maxPrice");
   const categoriesSearch = searchParams.get("categories");
-  const categoriesSearchArr = categoriesSearch?.split(",");
+  const categoriesSearchArr = categoriesSearch // important!
+    ? categoriesSearch.split(",")
+    : [];
   const inStock = searchParams.get("inStock");
   const curPage = Number(searchParams.get("skip"));
   const location = useLocation();
@@ -68,6 +70,10 @@ function ProductsPage() {
         totalProducts.current = total.data.count;
         setProducts(data);
       } catch (err) {
+        if (err.name === "CanceledError") {
+          console.log("Aborted");
+          return;
+        }
         throw err;
       } finally {
         setLoading(false);
@@ -94,10 +100,11 @@ function ProductsPage() {
 
   return (
     <>
-      <div className="px-12 py-12 flex flex-col gap-8 font-montserrat mt-12">
+      <div className="px-6 py-24 flex flex-col gap-8 font-montserrat mt-12 break-400px:px-12">
         <h2 className=" font-bold text-2xl">Our Products :</h2>
         <Link to={"create"}>Create</Link>
         <FilterProducts
+          searchParams={searchParams}
           setSearchParams={setSearchParams}
           nameSearch={nameSearch}
           minPriceSearch={minPriceSearch}
@@ -136,7 +143,6 @@ function ProductsPage() {
           Next
         </Button>
       </div>
-      {/* <CreateProduct globalSetState={setProducts} /> */}
       <Outlet />
     </>
   );
