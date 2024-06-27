@@ -8,7 +8,8 @@ function Modal({ children, className, btn }) {
       <div className=" fixed bg-primary-700 top-0 left-0 bottom-0 right-0 opacity-50"></div>
       <div
         className={cn(
-          "fixed top-1/3 left-1/2 bg-primary-110 min-w-80 z-50 translate-x-[-50%] p-10 font-montserrat"
+          "fixed top-1/4 left-1/2 bg-primary-110 min-w-80 z-50 translate-x-[-50%] font-montserrat h-400",
+          className
         )}
       >
         <Button

@@ -73,7 +73,7 @@ function NavbBar() {
                   : ""
               } hidden break-600px:inline-block`}
             >
-              Products
+              User
             </span>{" "}
           </Link>
         </li>

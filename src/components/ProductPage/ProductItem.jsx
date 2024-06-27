@@ -12,7 +12,7 @@ function ProductItem(props) {
         className=" bg-white pb-10 rounded-lg shadow-lg max-w-md w-80 break-500px:w-400 h-400 relative flex flex-col justify-between overflow-hidden"
       >
         <img src="https://dummyimage.com/400x200" alt="Placeholder Image" />
-        <div className="px-10 pt-4 z-50">
+        <div className="px-10 pt-4 z-10">
           <div className="flex justify-between">
             <h3 className=" font-semibold text-lg">{product.name}</h3>
             <Link to={`/product/${product._id}`}>

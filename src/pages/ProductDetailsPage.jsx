@@ -39,12 +39,21 @@ function ProductDetailsPage() {
             navToPrevPage();
           },
         }}
+        className=" w-1/2 max-w-lg"
       >
-        <div >
-          <h3>{product.name}</h3>
-          <p>{product.category}</p>
-          <div className="">
-            <h4 className=" ">
+        <div className=" h-full w-full flex flex-col gap-2 justify-center flex-wrap overflow-hidden px-4">
+          <img src="https://dummyimage.com/400x200" alt="Placeholder Image" className=" rounded-md"/>
+          <h3 className="font-semibold text-lg">{product.name}</h3>
+          <div className="  flex flex-col flex-wrap">
+            <h4 className=" font-semibold">Categories:</h4>
+            <ul className=" flex gap-2">
+              {product.categories?.map((category) => {
+                return <li key={category}>{category}</li>;
+              })}
+            </ul>
+          </div>
+          <div className=" flex justify-end">
+            <h4 className=" underline decoration-primary-500 font-semibold">
               Total: <span>{`${product.price}$`}</span>
             </h4>
           </div>

@@ -15,9 +15,10 @@ import { FilterProducts } from "../components/ProductPage/FilterProduct";
 
 function ProductsPage() {
   // edit, delete snackbar
+  // STATES
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  // SEARCH PARAMS
   const [searchParams, setSearchParams] = useSearchParams({
     name: "",
     minPrice: 0,
@@ -27,6 +28,8 @@ function ProductsPage() {
     skip: 0,
   });
 
+  const location = useLocation();
+  //REQ PARAMS DERIVED STATES
   const nameSearch = searchParams.get("name");
   const minPriceSearch = searchParams.get("minPrice");
   const maxPriceSearch = searchParams.get("maxPrice");
@@ -36,16 +39,17 @@ function ProductsPage() {
     : [];
   const inStock = searchParams.get("inStock");
   const curPage = Number(searchParams.get("skip"));
-  const location = useLocation();
 
+  // PAGINATION RELATIVE VARIABLES
   const totalProducts = useRef(0);
-
   const numOfPages = totalProducts.current
     ? Math.ceil(totalProducts.current / 6)
     : 0;
 
+  // DEBOUNCE HANDLER, THEN WE TRACK IT
   const debouncedSearchParams = useDebounce(searchParams, 400); // Im passing the object that I want to delay by debounce, then I will track the changes of the debounceParams in the useEffect
 
+  //  FETCH REQUESTS
   useEffect(() => {
     const abortController = new AbortController();
     async function getProducts() {
@@ -85,6 +89,7 @@ function ProductsPage() {
     };
   }, [debouncedSearchParams]);
 
+  //Pagination
   function handleNextPage() {
     setSearchParams((prev) => {
       prev.set("skip", curPage + 1);
