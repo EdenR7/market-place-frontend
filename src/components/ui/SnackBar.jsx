@@ -13,7 +13,6 @@ function SnackBar({
   onClick,
   children,
 }) {
-  console.log(1);
   const labelColor = ""
   const contextColor = ""
   const [displaySnack, setDisplaySnack] = useState(true);

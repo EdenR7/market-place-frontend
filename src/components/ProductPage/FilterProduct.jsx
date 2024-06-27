@@ -67,7 +67,7 @@ export function FilterProducts(props) {
                 id="filter-name"
                 name="name"
                 placeholder="Search ..."
-                className="py-1 focus:outline-none"
+                className="py-1 focus:outline-none bg-yellow-50"
               />
               <IoIosSearch className=" text-xl text-gray-400" />
             </div>

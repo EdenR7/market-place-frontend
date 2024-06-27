@@ -11,7 +11,6 @@ import CreateProductPage from "./pages/CreateProductPage";
 import UserPage from "./pages/UserPage";
 
 function App() {
-  // item
   // snackBar
   // fix the inStock design
   // Add a submit button option

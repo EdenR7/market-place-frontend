@@ -3,6 +3,12 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        "gradient-yellow":
+          "linear-gradient(to right, #FFE97C, hsl(45, 80%, 71%))",
+        "gradient-yellow-reverse":
+          "linear-gradient(to right, hsl(45, 80%, 61%), #FFE97C)",
+      },
       fontFamily: {
         sans: ['"Open Sans"', "sans-serif"],
         montserrat: ['"Montserrat"', "sans-serif"],
@@ -17,6 +23,10 @@ export default {
       },
       spacing: {
         400: "400px",
+        500: "500px",
+        600: "600px",
+        700: "700px",
+        800: "800px",
       },
       colors: {
         "primary-110": "hsl(49, 65%, 97%)",

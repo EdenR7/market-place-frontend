@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import useFetch from "../hooks/useFetch";
-import { data } from "browserslist";
 import ProductList from "../components/ProductPage/ProductList";
 import { Outlet } from "react-router";
-import CreateProduct from "../components/general/CreateProduct";
 import ProductItem from "../components/ProductPage/ProductItem";
 import SnackBar from "../components/ui/SnackBar";
 import { useSearchParams, useLocation, Link } from "react-router-dom";
@@ -105,7 +102,7 @@ function ProductsPage() {
 
   return (
     <>
-      <div className="px-6 py-24 flex flex-col gap-8 font-montserrat mt-12 break-400px:px-12">
+      <div className="px-6 py-24 flex flex-col gap-8 font-montserrat mt-12 break-400px:px-12 bg-yellow-50">
         <h2 className=" font-bold text-2xl">Our Products :</h2>
         <Link to={"create"}>Create</Link>
         <FilterProducts
@@ -134,7 +131,7 @@ function ProductsPage() {
           })}
         </ProductList>
       </div>
-      <div className="  flex gap-10 justify-center">
+      <div className="  flex gap-10 justify-center bg-yellow-50">
         <Button onClick={handlePrevPage} disabled={curPage === 0}>
           Prev
         </Button>

@@ -41,7 +41,7 @@ function ProductDetailsPage() {
         }}
         className=" w-1/2 max-w-lg"
       >
-        <div className=" h-full w-full flex flex-col gap-2 justify-center flex-wrap overflow-hidden px-4">
+        <div className=" h-full w-full flex flex-col gap-2 justify-center flex-wrap overflow-hidden px-4 mt-12">
           <img src="https://dummyimage.com/400x200" alt="Placeholder Image" className=" rounded-md"/>
           <h3 className="font-semibold text-lg">{product.name}</h3>
           <div className="  flex flex-col flex-wrap">

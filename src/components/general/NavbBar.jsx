@@ -10,7 +10,7 @@ function NavbBar() {
 
   return (
     <nav className=" top-0 left-0 fixed z-50 w-full flex justify-between px-6 py-6 shadow-md bg-white break-400px:px-12">
-      <h3 className=" text-primary-500 font-bold">MARKET PLACE</h3>
+      <h3 className=" text-primary-500 font-bold">BazaarHub</h3>
       <ul className="flex gap-4 break-600px:gap-8 items-center">
         <li className=" transition hover:text-primary-500 hover:font-semibold">
           <Link className="flex items-center gap-1" to={"/"}>
