@@ -2,6 +2,7 @@ import React from "react";
 
 function HomePage() {
   return (
+    //
     <div className=" mt-12 px-6 break-400px:px-12 font-montserrat">
       <div className=" flex flex-col justify-center w-full px-4 h-600 bg-repeat-x bg-[url('https://img.freepik.com/free-photo/shopping-carts-facing-each-other_23-2148288223.jpg?w=900&t=st=1719486501~exp=1719487101~hmac=2cf21c0c90fd8871a23cbc8544515f046c23bb0f3e24dd75bc77506d7fd28f4f')]">
         <h1 className=" text-center font-bold text-5xl text-primary-110 mb-8">
