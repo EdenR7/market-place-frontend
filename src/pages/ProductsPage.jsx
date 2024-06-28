@@ -22,7 +22,7 @@ function ProductsPage() {
     maxPrice: 2000,
     inStock: false,
     categories: "",
-    skip: 0,
+    page: 1,
   });
 
   const location = useLocation();
@@ -35,7 +35,7 @@ function ProductsPage() {
     ? categoriesSearch.split(",")
     : [];
   const inStock = searchParams.get("inStock");
-  const curPage = Number(searchParams.get("skip"));
+  const curPage = Number(searchParams.get("page"));
 
   // PAGINATION RELATIVE VARIABLES
   const totalProducts = useRef(0);
@@ -54,7 +54,7 @@ function ProductsPage() {
         setLoading(true);
         if (curPage < 0) {
           setSearchParams((prev) => {
-            prev.set("skip", 0);
+            prev.set("page", 1);
             return prev;
           });
           return;
@@ -89,20 +89,20 @@ function ProductsPage() {
   //Pagination
   function handleNextPage() {
     setSearchParams((prev) => {
-      prev.set("skip", curPage + 1);
+      prev.set("page", curPage + 1);
       return prev;
     });
   }
   function handlePrevPage() {
     setSearchParams((prev) => {
-      prev.set("skip", curPage - 1);
+      prev.set("page", curPage - 1);
       return prev;
     });
   }
 
   return (
     <>
-      <div className="px-6 py-24 flex flex-col gap-8 font-montserrat mt-12 break-400px:px-12 bg-yellow-50">
+      <div className="px-6 py-24 flex flex-col gap-8 font-montserrat mt-12 break-400px:px-12 ">
         <h2 className=" font-bold text-2xl">Our Products :</h2>
         <Link to={"create"}>Create</Link>
         <FilterProducts
@@ -131,16 +131,16 @@ function ProductsPage() {
           })}
         </ProductList>
       </div>
-      <div className="  flex gap-10 justify-center bg-yellow-50">
-        <Button onClick={handlePrevPage} disabled={curPage === 0}>
+      <div className="  flex gap-10 justify-center ">
+        <Button onClick={handlePrevPage} disabled={curPage === 1}>
           Prev
         </Button>
         <div className=" font-semibold">
-          {numOfPages ? `${curPage + 1} of ${numOfPages}` : "No results found"}
+          {numOfPages ? `${curPage} of ${numOfPages}` : "No results found"}
         </div>
         <Button
           onClick={handleNextPage}
-          disabled={curPage + 1 === numOfPages || numOfPages === 0}
+          disabled={curPage === numOfPages || numOfPages === 0}
         >
           Next
         </Button>

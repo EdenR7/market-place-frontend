@@ -9,7 +9,7 @@ function ProductItem(props) {
     <>
       <li
         key={product._id}
-        className=" bg-primary-110 pb-10 rounded-lg shadow-lg max-w-md w-80 break-500px:w-400 h-400 relative flex flex-col justify-between overflow-hidden"
+        className=" pb-10 rounded-lg shadow-lg max-w-md w-80 break-500px:w-400 h-400 relative flex flex-col justify-between overflow-hidden"
       >
         <img src="https://dummyimage.com/400x200" alt="Placeholder Image" />
         <div className="px-10 pt-4 z-10">

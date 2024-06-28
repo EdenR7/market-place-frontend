@@ -9,6 +9,7 @@ function PriceRangeSlider({ searchParams, setSearchParams }) {
     setSearchParams((prev) => {
       prev.set("minPrice", newValues[0]);
       prev.set("maxPrice", newValues[1]);
+      prev.set("page", 1);
       return prev;
     });
   }

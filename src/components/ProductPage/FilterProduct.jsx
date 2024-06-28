@@ -19,14 +19,14 @@ export function FilterProducts(props) {
     if (ev.target.type === "checkbox") {
       const checked = ev.target.checked;
       setSearchParams((prev) => {
-        prev.set("skip", 0);
+        prev.set("page", 1);
         prev.set(inputName, checked);
         return prev;
       });
     } else {
       const value = ev.target.value;
       setSearchParams((prev) => {
-        prev.set("skip", 0);
+        prev.set("page", 1);
         prev.set(inputName, value);
         return prev;
       });
@@ -39,7 +39,7 @@ export function FilterProducts(props) {
       ? [...categoriesSearchArr, inputName]
       : categoriesSearchArr.filter((category) => category !== inputName);
     setSearchParams((prev) => {
-      prev.set("skip", 0);
+      prev.set("page", 1);
       prev.set("categories", newCategoriesArr.join(","));
       return prev;
     });
@@ -67,7 +67,7 @@ export function FilterProducts(props) {
                 id="filter-name"
                 name="name"
                 placeholder="Search ..."
-                className="py-1 focus:outline-none bg-yellow-50"
+                className="py-1 focus:outline-none w-5/6"
               />
               <IoIosSearch className=" text-xl text-gray-400" />
             </div>
