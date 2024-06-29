@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      transitionProperty: {
+        height: "height",
+      },
       backgroundImage: {
         "gradient-yellow":
           "linear-gradient(to right, #FFE97C, hsl(45, 80%, 71%))",

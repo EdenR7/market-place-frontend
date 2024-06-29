@@ -12,7 +12,7 @@ import { FilterProducts } from "../components/ProductPage/FilterProduct";
 import { SnackBarContext } from "../context/snackBarContext";
 
 function ProductsPage() {
-  // edit, delete snackbar
+  // edit, delete
   // STATES
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -51,10 +51,6 @@ function ProductsPage() {
 
   //  FETCH REQUESTS
   useEffect(() => {
-    // displaySnackBar({
-    //   label: "Item added successfully",
-    //   closeManually: true,
-    // });
     const abortController = new AbortController();
     async function getProducts() {
       try {
@@ -111,7 +107,7 @@ function ProductsPage() {
     <>
       <div className="px-6 py-24 flex flex-col gap-8 font-montserrat mt-12 break-400px:px-12 ">
         <h2 className=" font-bold text-2xl">Our Products :</h2>
-        <Link to={"create"}>Create</Link>
+        <Link to={"create"} className=" w-fit">Create</Link>
         <FilterProducts
           searchParams={searchParams}
           setSearchParams={setSearchParams}
