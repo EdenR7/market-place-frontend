@@ -14,7 +14,7 @@ function Modal({ children, className, btn }) {
       >
         <Button
           onClick={btn.onClick}
-          className={` ${btn.btnClassName} absolute top-2 right-2`}
+          className={`absolute top-2 right-2 ${btn.btnClassName}`}
         >
           {btn.context ? btn.context : "Close"}
         </Button>

@@ -17,7 +17,6 @@ function SnackBar({
 }) {
   const { snackBar, setSnackBar, displaySnackBar, closeSnackBar } =
     useContext(SnackBarContext);
-  // console.log(snackBar.danger);
   useEffect(() => {
     setTimeout(() => {
       if (!snackBar.closeManually) {
@@ -38,7 +37,7 @@ function SnackBar({
         {snackBar.danger ? (
           <MdErrorOutline className=" text-xl w-10 text-red-600" />
         ) : (
-          <CiCircleCheck className=" text-xl w-12 text-green-600" />
+          <CiCircleCheck className=" text-xl w-10 text-green-600" />
         )}
 
         <h3 className=" text-sm font-semibold">{snackBar.label}</h3>

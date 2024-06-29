@@ -10,12 +10,14 @@ function UserPage() {
   const [login, setLogin] = useToggle(true);
 
   return (
-    <div className=" mt-24 py-4 border border-primary-500 max-w-lg mx-auto flex justify-center min-h-400">
-      {login ? (
-        <LoginForm login={login} setLogin={setLogin} />
-      ) : (
-        <SignUpForm login={login} setLogin={setLogin} />
-      )}
+    <div className="min-h-full flex items-center">
+      <div className=" mt-24 py-4 border border-primary-500 min-w-500 mx-auto flex justify-center min-h-500 rounded-md">
+        {login ? (
+          <LoginForm login={login} setLogin={setLogin} />
+        ) : (
+          <SignUpForm login={login} setLogin={setLogin} />
+        )}
+      </div>
     </div>
   );
 }

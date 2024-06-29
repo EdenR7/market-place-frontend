@@ -13,7 +13,6 @@ function CreateProductPage() {
   const navigate = useNavigate();
   const { snackBar, displaySnackBar } = useContext(SnackBarContext);
 
-  const [displayErrorSnack, setDisplayErrorSnack] = useState(false);
   const [newProduct, setNewProduct] = useState({
     name: "",
     categories: [],
@@ -21,6 +20,7 @@ function CreateProductPage() {
     price: "",
   });
   function navToPrevPage() {
+    console.log("Attempt");
     navigate(-1);
   }
   function handleListBoxFilter(ev) {
@@ -50,7 +50,6 @@ function CreateProductPage() {
         label: `Product created successfully`,
       });
     } catch (err) {
-      console.log(err.response.status === 400);
       displaySnackBar({
         label: ` ${
           err.response.status === 400
@@ -68,8 +67,9 @@ function CreateProductPage() {
         btn={{
           onClick: navToPrevPage,
           context: <IoMdClose />,
-          btnClassName: " border-0 hover:bg-inherit hover:text-red-500",
+          btnClassName: " border-0 hover:bg-inherit hover:text-red-500 right-0",
         }}
+        className="p-8"
       >
         <div className=" p-4">
           <h3 className="font-semibold text-lg pb-4 ">Add New Product</h3>
@@ -103,14 +103,14 @@ function CreateProductPage() {
                     <input
                       checked={newProduct.categories.includes(category)}
                       type="checkbox"
-                      id={`${category}FilterOption`}
+                      id={`${category}CreateOption`}
                       name={category}
                       value={category}
                       onChange={handleListBoxFilter}
                       className=" cursor-pointer"
                     />
                     <label
-                      htmlFor={`${category}FilterOption`}
+                      htmlFor={`${category}CreateOption`}
                       className=" cursor-pointer"
                     >
                       {category}

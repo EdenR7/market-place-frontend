@@ -39,7 +39,7 @@ export function SnackBarCtxProvider({ children }) {
 
   function closeSnackBar() {
     setSnackBar((prev) => {
-      return { ...prev, display: false, danger: false };
+      return { ...prev, display: false, danger: false, closeManually: false };
     });
   }
 
