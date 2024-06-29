@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../components/ui/Button";
 import axios from "axios";
@@ -6,10 +6,13 @@ import Modal from "../components/ui/Modal";
 import { Link, useNavigate } from "react-router-dom";
 import SnackBar from "../components/ui/SnackBar";
 import { CATEGORIES_LIST } from "../utils/url_constants";
+import { SnackBarContext } from "../context/snackBarContext";
 const PRODUCTS_URL = "http://localhost:3000/api/product/";
 
 function CreateProductPage() {
   const navigate = useNavigate();
+  const { snackBar, displaySnackBar } = useContext(SnackBarContext);
+
   const [displayErrorSnack, setDisplayErrorSnack] = useState(false);
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -43,8 +46,20 @@ function CreateProductPage() {
         price: "",
       });
       navToPrevPage();
+      displaySnackBar({
+        label: `Product created successfully`,
+      });
     } catch (err) {
-      setDisplayErrorSnack(true);
+      console.log(err.response.status === 400);
+      displaySnackBar({
+        label: ` ${
+          err.response.status === 400
+            ? "Please make sure you filled correctly all the fields"
+            : "Error in create operation"
+        }`,
+        closeManually: true,
+        danger: true,
+      });
     }
   }
   return (
@@ -62,7 +77,6 @@ function CreateProductPage() {
             className=" flex flex-col gap-2 max-w-400"
             onSubmit={(ev) => {
               ev.preventDefault();
-              setDisplayErrorSnack(false);
               addProduct(newProduct);
             }}
           >
@@ -137,16 +151,7 @@ function CreateProductPage() {
           </form>
         </div>
       </Modal>
-      {displayErrorSnack ? (
-        <SnackBar
-          label="Error"
-          context="Error in create operation (make sure all the fields are filled approprietly)"
-          danger
-          closeManually={true}
-        ></SnackBar>
-      ) : (
-        ""
-      )}
+      {snackBar.display && <SnackBar />}
     </>
   );
 }

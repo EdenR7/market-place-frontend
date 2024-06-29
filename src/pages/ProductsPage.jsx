@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import ProductList from "../components/ProductPage/ProductList";
 import { Outlet } from "react-router";
@@ -9,12 +9,15 @@ import Button from "../components/ui/Button";
 import useDebounce from "../hooks/useDebounce";
 import { PRODUCTS_URL } from "../utils/url_constants";
 import { FilterProducts } from "../components/ProductPage/FilterProduct";
+import { SnackBarContext } from "../context/snackBarContext";
 
 function ProductsPage() {
   // edit, delete snackbar
   // STATES
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const { snackBar, displaySnackBar } = useContext(SnackBarContext);
   // SEARCH PARAMS
   const [searchParams, setSearchParams] = useSearchParams({
     name: "",
@@ -48,6 +51,10 @@ function ProductsPage() {
 
   //  FETCH REQUESTS
   useEffect(() => {
+    // displaySnackBar({
+    //   label: "Item added successfully",
+    //   closeManually: true,
+    // });
     const abortController = new AbortController();
     async function getProducts() {
       try {
@@ -145,6 +152,7 @@ function ProductsPage() {
           Next
         </Button>
       </div>
+      {snackBar.display && <SnackBar />}
       <Outlet />
     </>
   );
