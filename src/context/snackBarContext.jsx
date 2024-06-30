@@ -7,7 +7,7 @@ export const SnackBarContext = createContext({
     context: "",
     closeManually: false,
     className: "",
-    danger: false,
+    type: "",
   },
   setSnackBar: () => {},
   displaySnackBar: () => {},
@@ -21,11 +21,11 @@ export function SnackBarCtxProvider({ children }) {
     context: "",
     closeManually: false,
     className: "",
-    danger: false,
+    type: "success",
   });
 
   function displaySnackBar(props) {
-    const { label, context, closeManually, className, danger } = props;
+    const { label, context, closeManually, className, type } = props;
     setSnackBar((prev) => ({
       ...prev,
       display: true,
@@ -33,13 +33,13 @@ export function SnackBarCtxProvider({ children }) {
       context: context || prev.context,
       closeManually: closeManually || prev.closeManually,
       className: className || prev.className,
-      danger: danger || prev.danger,
+      type: type || "success",
     }));
   }
 
   function closeSnackBar() {
     setSnackBar((prev) => {
-      return { ...prev, display: false, danger: false, closeManually: false };
+      return { ...prev, display: false, type: "success", closeManually: false };
     });
   }
 

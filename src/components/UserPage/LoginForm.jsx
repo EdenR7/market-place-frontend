@@ -34,9 +34,9 @@ export default function LoginForm(props) {
             : "Error in create operation"
         }`,
         closeManually: true,
-        danger: true,
+        type: "danger",
       });
-      console.error(err);
+      console.log(err);
     }
   }
 

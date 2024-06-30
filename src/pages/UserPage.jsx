@@ -6,8 +6,10 @@ import useToggle from "../hooks/useToggle";
 import LoginForm from "../components/UserPage/LoginForm";
 import { SignUpForm } from "../components/UserPage/SignUpForm";
 import { UserContext } from "../context/userContext";
+import { SnackBarContext } from "../context/snackBarContext";
+import SnackBar from "../components/ui/SnackBar";
 
-export function UserNotLogged(params) {
+export function UserNotLogged(props) {
   const [login, setLogin] = useToggle(true);
 
   return (
@@ -23,10 +25,27 @@ export function UserNotLogged(params) {
   );
 }
 
-function UserPage() {
-  const { user } = useContext(UserContext);
+export function UserProfile(props) {
+  const { user, logoutUser } = useContext(UserContext);
 
-  return <UserNotLogged />;
+  return (
+    <div className=" mt-32">
+      <h2 className=" text-3xl text-center"> Hello {user?.username} !</h2>
+      <Button onClick={logoutUser}>Logout</Button>
+    </div>
+  );
+}
+
+function UserPage() {
+  const { user, logoutUser } = useContext(UserContext);
+  const { snackBar, displaySnackBar } = useContext(SnackBarContext);
+
+  return (
+    <>
+      {user ? <UserProfile /> : <UserNotLogged />}
+      {snackBar.display && <SnackBar />}
+    </>
+  );
 }
 
 export default UserPage;

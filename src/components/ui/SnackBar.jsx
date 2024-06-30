@@ -5,16 +5,7 @@ import { SnackBarContext } from "../../context/snackBarContext";
 import { CiCircleCheck } from "react-icons/ci";
 import { MdErrorOutline } from "react-icons/md";
 
-function SnackBar({
-  label,
-  context,
-  closeManually,
-  className,
-  danger,
-  alert,
-  onClick,
-  children,
-}) {
+function SnackBar() {
   const { snackBar, setSnackBar, displaySnackBar, closeSnackBar } =
     useContext(SnackBarContext);
   useEffect(() => {
@@ -30,11 +21,11 @@ function SnackBar({
       className={`${
         snackBar.display ? "" : "hidden"
       } fixed bottom-2 right-2 z-50 w-1/2 max-w-72 bg-green-300 px-4 py-3 rounded-md ${
-        snackBar.danger && "bg-red-300"
+        snackBar.type === "danger" && "bg-red-300"
       }`}
     >
       <div className=" flex items-center gap-2 mt-2 mb-1">
-        {snackBar.danger ? (
+        {snackBar.type === "danger" ? (
           <MdErrorOutline className=" text-xl w-10 text-red-600" />
         ) : (
           <CiCircleCheck className=" text-xl w-10 text-green-600" />

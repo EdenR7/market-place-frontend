@@ -24,11 +24,12 @@ export function SignUpForm(props) {
       displaySnackBar({
         label: `User created successfully`,
       });
+      setLogin(true);
     } catch (err) {
       displaySnackBar({
         label: "Error in create User",
         closeManually: true,
-        danger: true,
+        type: "danger",
       });
       console.error(err);
     }

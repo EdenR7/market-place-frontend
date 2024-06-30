@@ -32,13 +32,21 @@ export function NavBarNotUser({ currentPath }) {
 }
 export function NavBarWithUser({ user, currentPath }) {
   return (
-    <Link
-      to={"/user"}
-      className={`${
-        currentPath.startsWith("/user") ? "bg-primary-500" : " bg-primary-200"
-      } rounded-full w-7 h-7 flex items-center justify-center`}
-    >
-      {createAvatar(user.username)}
+    <Link className=" flex gap-2 items-center" to={"/user"}>
+      <span
+        className={`${
+          currentPath.startsWith("/user") ? "text-primary-500" : ""
+        }`}
+      >
+        Hi {user.username} !
+      </span>
+      <div
+        className={`${
+          currentPath.startsWith("/user") ? "bg-primary-500" : " bg-primary-200"
+        } rounded-full w-7 h-7 flex items-center justify-center`}
+      >
+        {createAvatar(user.username)}
+      </div>
     </Link>
   );
 }

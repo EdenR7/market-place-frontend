@@ -11,6 +11,9 @@ export const UserContext = createContext({
     lastName: "",
     products: [],
   },
+  setUser: () => {},
+  loginUserContext: () => {},
+  logoutUser: () => {},
 });
 
 export function UserContextProvider({ children }) {
@@ -47,7 +50,9 @@ export function UserContextProvider({ children }) {
   }
 
   return (
-    <UserContext.Provider value={{ user, setUser, loginUserContext }}>
+    <UserContext.Provider
+      value={{ user, setUser, loginUserContext, logoutUser }}
+    >
       {children}
     </UserContext.Provider>
   );

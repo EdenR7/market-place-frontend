@@ -38,6 +38,7 @@ function CreateProductPage() {
   }
   async function addProduct(product) {
     try {
+      console.log(product);
       const { data: newP } = await axios.post(PRODUCTS_URL, product);
       setNewProduct({
         name: "",
@@ -57,7 +58,7 @@ function CreateProductPage() {
             : "Error in create operation"
         }`,
         closeManually: true,
-        danger: true,
+        type: "danger",
       });
     }
   }
