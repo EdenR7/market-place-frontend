@@ -21,8 +21,8 @@ export default {
         "break-400px": "400px",
         "break-500px": "500px",
         "break-600px": "600px",
-        "2col": "900px",
-        "3col": "1300px",
+        "2col": "750px",
+        "3col": "1100px",
       },
       spacing: {
         400: "400px",

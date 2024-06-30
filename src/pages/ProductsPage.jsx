@@ -107,7 +107,9 @@ function ProductsPage() {
     <>
       <div className="px-6 py-24 flex flex-col gap-8 font-montserrat mt-12 break-400px:px-12 ">
         <h2 className=" font-bold text-2xl">Our Products :</h2>
-        <Link to={"create"} className=" w-fit">Create</Link>
+        <Link to={"create"} className=" w-fit">
+          Create
+        </Link>
         <FilterProducts
           searchParams={searchParams}
           setSearchParams={setSearchParams}
@@ -134,7 +136,7 @@ function ProductsPage() {
           })}
         </ProductList>
       </div>
-      <div className="  flex gap-10 justify-center ">
+      <div className="  flex gap-10 justify-center pb-10">
         <Button onClick={handlePrevPage} disabled={curPage === 1}>
           Prev
         </Button>

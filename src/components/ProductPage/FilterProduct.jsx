@@ -73,9 +73,11 @@ export function FilterProducts(props) {
         </Button>
       </div>
       <div
-        className={`overflow-hidden transition-max-height duration-700 ease-in ${
-          displayFilters ? "max-h-500" : "max-h-0"
-        } grid gap-2 max-w-sm mx-auto 2col:grid-cols-2 2col:max-w-4xl 2col:gap-x-16 3col:gap-x-32 3col:max-w-5xl`}
+        className={`overflow-hidden transition-max-height duration-300 ease-in ${
+          displayFilters
+            ? "max-h-600 "
+            : "max-h-0"
+        } grid gap-2  max-w-80 mx-auto 2col:grid-cols-2 2col:max-w-4xl 2col:gap-x-16 3col:gap-x-32 3col:max-w-4xl `}
       >
         <div className=" flex flex-col justify-center ">
           <div className=" flex justify-between gap-2 w-full items-center">

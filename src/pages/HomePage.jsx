@@ -57,7 +57,7 @@ function HomePage() {
             className={`max-w-7xl mx-auto h-600 flex flex-col justify-center text-center transition-all duration-500 ease-in ${
               isVisible.section1
                 ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-20"
+                : "opacity-0 translate-x-5"
             }`}
           >
             <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
@@ -83,7 +83,7 @@ function HomePage() {
             className={`max-w-7xl mx-auto h-600 flex flex-col justify-center text-center transition-all duration-500 ease-in ${
               isVisible.section2
                 ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-20"
+                : "opacity-0 -translate-x-5"
             }`}
           >
             <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
@@ -109,7 +109,7 @@ function HomePage() {
             className={`max-w-7xl mx-auto h-600 flex flex-col justify-center text-center transition-all duration-1000 ease-in-out ${
               isVisible.section3
                 ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-20"
+                : "opacity-0 translate-x-10"
             }`}
           >
             <h2 className="text-3xl font-extrabold text-gray-900 mb-6">

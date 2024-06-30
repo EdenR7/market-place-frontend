@@ -9,10 +9,10 @@ function ProductItem(props) {
     <>
       <li
         key={product._id}
-        className=" pb-10 rounded-lg shadow-lg max-w-md w-80 break-500px:w-400 h-400 relative flex flex-col justify-between overflow-hidden"
+        className=" pb-4 rounded-lg shadow-lg max-w-md w-80 h-80 relative flex flex-col justify-between overflow-hidden"
       >
         <img src="https://dummyimage.com/400x200" alt="Placeholder Image" />
-        <div className="px-10 pt-4 z-10">
+        <div className="px-6 pt-1 z-10">
           <div className="flex justify-between">
             <h3 className=" font-semibold text-lg">{product.name}</h3>
             <Link to={`/product/${product._id}`}>
@@ -21,7 +21,7 @@ function ProductItem(props) {
               </Button>
             </Link>
           </div>
-          <div className="mt-4 ">
+          <div className="mt-2 ">
             <h4 className="underline">Categories:</h4>
             <ul className="flex flex-wrap">
               {product.categories.map((category, index) => {

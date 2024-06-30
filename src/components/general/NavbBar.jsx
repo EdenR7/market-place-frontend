@@ -1,10 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { CiShop } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
+import { UserContext } from "../../context/userContext";
+import { createAvatar } from "../../utils/util_jsx_functions";
+
+export function NavBarNotUser({ currentPath }) {
+  return (
+    <Link className={` flex items-center gap-1`} to={"/user"}>
+      <span>
+        {" "}
+        <CiUser
+          className={`${
+            currentPath.startsWith("/user") ? "text-primary-500 text-lg" : ""
+          } `}
+        />
+      </span>
+      <span
+        className={`${
+          currentPath.startsWith("/user")
+            ? "font-semibold underline decoration-primary-500"
+            : ""
+        } hidden break-600px:inline-block`}
+      >
+        User
+      </span>{" "}
+    </Link>
+  );
+}
+export function NavBarWithUser({ user, currentPath }) {
+  return (
+    <Link
+      to={"/user"}
+      className={`${
+        currentPath.startsWith("/user") ? "bg-primary-500" : " bg-primary-200"
+      } rounded-full w-7 h-7 flex items-center justify-center`}
+    >
+      {createAvatar(user.username)}
+    </Link>
+  );
+}
 
 function NavbBar() {
+  const { user } = useContext(UserContext);
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -55,27 +95,11 @@ function NavbBar() {
           </Link>
         </li>
         <li className=" transition hover:text-primary-500 hover:font-semibold">
-          <Link className={` flex items-center gap-1`} to={"/user"}>
-            <span>
-              {" "}
-              <FaUser
-                className={`${
-                  currentPath.startsWith("/user")
-                    ? "text-primary-500"
-                    : " text-sm"
-                } `}
-              />
-            </span>
-            <span
-              className={`${
-                currentPath.startsWith("/user")
-                  ? "font-semibold underline decoration-primary-500"
-                  : ""
-              } hidden break-600px:inline-block`}
-            >
-              User
-            </span>{" "}
-          </Link>
+          {user ? (
+            <NavBarWithUser user={user} currentPath={currentPath} />
+          ) : (
+            <NavBarNotUser currentPath={currentPath} />
+          )}
         </li>
       </ul>
     </nav>
