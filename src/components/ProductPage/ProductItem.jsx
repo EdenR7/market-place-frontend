@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 import { AiOutlineProduct } from "react-icons/ai";
 
 function ProductItem(props) {
-  const { product, setProducts } = props;
+  const { product, setProducts, children } = props;
   return (
     <>
       <li
@@ -15,11 +15,8 @@ function ProductItem(props) {
         <div className="px-6 pt-1 z-10">
           <div className="flex justify-between">
             <h3 className=" font-semibold text-lg">{product.name}</h3>
-            <Link to={`/product/${product._id}`}>
-              <Button inverse>
-                <AiOutlineProduct />
-              </Button>
-            </Link>
+            {children}
+            
           </div>
           <div className="mt-2 ">
             <h4 className="underline">Categories:</h4>

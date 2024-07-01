@@ -18,7 +18,11 @@ import UserProducts from "./components/UserProfilePage/UserProducts";
 // import UserProfilePage from "./pages/UserProfilePage";
 
 function App() {
-  // Add a submit button option
+  // fix the page problem when Im on a product page (it displays the last page)
+  // layout design of the delete
+  // Add snack bar on delete
+  // problem in refresh inside the productDetails page
+  // pagination and search by name in userProducts
   return (
     <>
       <NavbBar />
@@ -43,6 +47,9 @@ function App() {
                 <Route index element={<UserProducts />} />
                 <Route path="create" element={<UserProducts />}>
                   <Route index element={<CreateProductPage />} />
+                </Route>
+                <Route path=":productId" element={<UserProducts />}>
+                  <Route index element={<ProductDetailsPage />} />
                 </Route>
               </Route>
             </Route>

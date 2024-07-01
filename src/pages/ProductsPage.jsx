@@ -10,9 +10,9 @@ import useDebounce from "../hooks/useDebounce";
 import { PRODUCTS_URL } from "../utils/url_constants";
 import { FilterProducts } from "../components/ProductPage/FilterProduct";
 import { SnackBarContext } from "../context/snackBarContext";
+import { AiOutlineProduct } from "react-icons/ai";
 
 function ProductsPage() {
-  // edit, delete
   // STATES
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -107,9 +107,6 @@ function ProductsPage() {
     <>
       <div className="px-6 py-24 flex flex-col gap-8 font-montserrat mt-12 break-400px:px-12 ">
         <h2 className=" font-bold text-2xl">Our Products :</h2>
-        {/* <Link to={"create"} className=" w-fit">
-          Create
-        </Link> */}
         <FilterProducts
           searchParams={searchParams}
           setSearchParams={setSearchParams}
@@ -131,7 +128,13 @@ function ProductsPage() {
                 key={product._id}
                 product={product}
                 setProducts={setProducts}
-              />
+              >
+                <Link to={`/product/${product._id}`}>
+                  <Button inverse>
+                    <AiOutlineProduct />
+                  </Button>
+                </Link>
+              </ProductItem>
             );
           })}
         </ProductList>

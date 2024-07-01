@@ -4,6 +4,10 @@ import axios from "axios";
 import { UserContext } from "../../context/userContext";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import SnackBar from "../ui/SnackBar";
+import ProductList from "../ProductPage/ProductList";
+import ProductItem from "../ProductPage/ProductItem";
+import { AiOutlineProduct } from "react-icons/ai";
+import Button from "../ui/Button";
 
 const USER_PRODUCTS_URL = "http://localhost:3000/api/user/products";
 
@@ -50,13 +54,26 @@ function UserProducts() {
           Create
         </Link>
         <h1 className=" text-center font-semibold text-3xl">
-          Hi {user?.username}, <span>{userProducts.length>0?"your current products :":"You still dont have any products"}</span>
+          Hi {user?.username},{" "}
+          <span>
+            {userProducts.length > 0
+              ? "your current products :"
+              : "You still dont have any products"}
+          </span>
         </h1>
-        <ul>
+        <ProductList>
           {userProducts.map((product) => {
-            return <li key={product?._id}>{product.name}</li>;
+            return (
+              <ProductItem key={product._id} product={product}>
+                <Link to={product._id}>
+                  <Button inverse>
+                    <AiOutlineProduct />
+                  </Button>
+                </Link>
+              </ProductItem>
+            );
           })}
-        </ul>
+        </ProductList>
       </div>
       {snackBar.display && <SnackBar />}
 

@@ -14,6 +14,7 @@ function Modal({ children, className, btn }) {
       >
         {children}
         <Button
+          strip={btn.strip}
           onClick={btn.onClick}
           className={`absolute top-2 right-2 ${btn.btnClassName}`}
         >
