@@ -7,12 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 import SnackBar from "../components/ui/SnackBar";
 import { CATEGORIES_LIST } from "../utils/url_constants";
 import { SnackBarContext } from "../context/snackBarContext";
-const PRODUCTS_URL = "http://localhost:3000/api/product/";
+const USER_PRODUCTS_URL = "http://localhost:3000/api/user/products";
 
 function CreateProductPage() {
   const navigate = useNavigate();
   const { snackBar, displaySnackBar } = useContext(SnackBarContext);
-
+  const token = localStorage.getItem("userToken");
   const [newProduct, setNewProduct] = useState({
     name: "",
     categories: [],
@@ -20,7 +20,6 @@ function CreateProductPage() {
     price: "",
   });
   function navToPrevPage() {
-    console.log("Attempt");
     navigate(-1);
   }
   function handleListBoxFilter(ev) {
@@ -38,8 +37,11 @@ function CreateProductPage() {
   }
   async function addProduct(product) {
     try {
-      console.log(product);
-      const { data: newP } = await axios.post(PRODUCTS_URL, product);
+      const { data: newP } = await axios.post(USER_PRODUCTS_URL, product, {
+        headers: {
+          Authorization: token,
+        },
+      });
       setNewProduct({
         name: "",
         categories: [],

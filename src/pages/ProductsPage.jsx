@@ -107,9 +107,9 @@ function ProductsPage() {
     <>
       <div className="px-6 py-24 flex flex-col gap-8 font-montserrat mt-12 break-400px:px-12 ">
         <h2 className=" font-bold text-2xl">Our Products :</h2>
-        <Link to={"create"} className=" w-fit">
+        {/* <Link to={"create"} className=" w-fit">
           Create
-        </Link>
+        </Link> */}
         <FilterProducts
           searchParams={searchParams}
           setSearchParams={setSearchParams}

@@ -10,6 +10,12 @@ import CreateProduct from "./pages/CreateProductPage";
 import CreateProductPage from "./pages/CreateProductPage";
 import UserPage from "./pages/UserPage";
 import Footer from "./components/general/Footer";
+import UserSetupPage from "./pages/UserSetupPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import UserNavBar from "./components/UserProfilePage/UserNavBar";
+import UserProducts from "./components/UserProfilePage/UserProducts";
+// import UserSetupPage from "./pages/UserSetupPage";
+// import UserProfilePage from "./pages/UserProfilePage";
 
 function App() {
   // Add a submit button option
@@ -17,7 +23,6 @@ function App() {
     <>
       <NavbBar />
       <div className=" min-h-screen">
-        
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/product">
@@ -29,7 +34,19 @@ function App() {
               <Route index element={<CreateProductPage />} />
             </Route>
           </Route>
-          <Route path="/user" element={<UserPage />} />
+          <Route path="/user">
+            <Route index element={<UserPage />} />
+            <Route path="setup" element={<UserSetupPage />} />
+            <Route path="profile" element={<UserNavBar />}>
+              <Route index element={<UserProfilePage />} />
+              <Route path="products">
+                <Route index element={<UserProducts />} />
+                <Route path="create" element={<UserProducts />}>
+                  <Route index element={<CreateProductPage />} />
+                </Route>
+              </Route>
+            </Route>
+          </Route>
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </div>

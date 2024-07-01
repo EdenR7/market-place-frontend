@@ -20,27 +20,39 @@ export function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const userToken = useRef(localStorage.getItem("userToken"));
 
-  async function getUserById(id) {
+  async function getUserByToken(token) {
     try {
-      const res = await axios.get(USER_URL + id);
+      const res = await axios.get(USER_URL, {
+        headers: {
+          Authorization: token,
+        },
+      });
       setUser(res.data);
     } catch (err) {
       console.error(err);
       throw err;
     }
   }
+  // async function getUserById(id) {
+  //   try {
+  //     const res = await axios.get(USER_URL + id);
+  //     setUser(res.data);
+  //   } catch (err) {
+  //     console.error(err);
+  //     throw err;
+  //   }
+  // }
 
   useEffect(() => {
     if (userToken.current !== null) {
-      const { userId } = formatJWTTokenToUser(userToken.current);
-      getUserById(userId);
+      // const { userId } = formatJWTTokenToUser(userToken.current);
+      getUserByToken(userToken.current);
     }
   }, []);
 
   function loginUserContext(token) {
-    const { userId } = formatJWTTokenToUser(token);
-    // console.log(userId);
-    getUserById(userId);
+    // const { userId } = formatJWTTokenToUser(token);
+    getUserByToken(token);
     // local storage
   }
   function logoutUser() {

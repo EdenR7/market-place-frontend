@@ -7,6 +7,7 @@ import { formatJWTTokenToUser } from "../../utils/util";
 import { SnackBarContext } from "../../context/snackBarContext";
 import SnackBar from "../ui/SnackBar";
 import { UserContext } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 const LOGIN_URL = "http://localhost:3000/api/auth/login";
 
 export default function LoginForm(props) {
@@ -17,15 +18,19 @@ export default function LoginForm(props) {
     password: "",
   });
   const { loginUserContext } = useContext(UserContext);
+
+  const navigate = useNavigate();
   async function signIn(userData) {
     try {
       const res = await axios.post(LOGIN_URL, userData);
       const { token } = res.data;
+      console.log(token);
       localStorage.setItem("userToken", token);
       loginUserContext(token);
       displaySnackBar({
         label: `Logged in successfully`,
       });
+      navigate("/user/profile");
     } catch (err) {
       displaySnackBar({
         label: ` ${
