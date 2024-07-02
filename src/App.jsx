@@ -19,9 +19,6 @@ import UserProducts from "./components/UserProfilePage/UserProducts";
 
 function App() {
   // fix the page problem when Im on a product page (it displays the last page)
-  // layout design of the delete
-  // Add snack bar on delete
-  // problem in refresh inside the productDetails page
   // pagination and search by name in userProducts
   return (
     <>

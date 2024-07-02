@@ -21,6 +21,7 @@ export default {
         "break-400px": "400px",
         "break-500px": "500px",
         "break-600px": "600px",
+        "break-950px": "950px",
         "2col": "750px",
         "3col": "1100px",
       },

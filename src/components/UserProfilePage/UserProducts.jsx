@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { SnackBarContext } from "../../context/snackBarContext";
 import axios from "axios";
 import { UserContext } from "../../context/userContext";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import SnackBar from "../ui/SnackBar";
 import ProductList from "../ProductPage/ProductList";
 import ProductItem from "../ProductPage/ProductItem";
@@ -18,6 +18,7 @@ function UserProducts() {
 
   const { snackBar, displaySnackBar } = useContext(SnackBarContext);
   const token = localStorage.getItem("userToken");
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -35,6 +36,19 @@ function UserProducts() {
       } catch (err) {
         if (err.name === "CanceledError") {
           console.log("Aborted");
+          return;
+        }
+        const { error } = err.response.data;
+        if (error === "Invalid token" || error === "Access denied") {
+          localStorage.removeItem("userToken");
+          logoutUser();
+          navigate("/user/setup");
+          displaySnackBar({
+            label: "Token Expires, Please log in again",
+            closeManually: true,
+            type: "danger",
+          });
+          console.log("Token Expires");
           return;
         }
         throw err;

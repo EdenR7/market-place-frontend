@@ -7,12 +7,16 @@ import { IoMdClose } from "react-icons/io";
 import { UserContext } from "../context/userContext";
 import { MdDeleteOutline } from "react-icons/md";
 import Button from "../components/ui/Button";
+import SnackBar from "../components/ui/SnackBar";
+import { SnackBarContext } from "../context/snackBarContext";
 const USER_PRODUCTS_URL = "http://localhost:3000/api/user/products/";
 
 const PRODUCTS_URL = "http://localhost:3000/api/product/";
 
 function ProductDetailsPage() {
   const { user, logoutUser } = useContext(UserContext);
+  const { snackBar, displaySnackBar } = useContext(SnackBarContext);
+
   const { productId } = useParams();
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
@@ -32,9 +36,17 @@ function ProductDetailsPage() {
         },
       });
       // snackBar
+      displaySnackBar({
+        label: `Product deleted successfully`,
+      });
       navToPrevPage(-1);
     } catch (err) {
       // snackBar
+      displaySnackBar({
+        label: "Error in Delete operation",
+        closeManually: true,
+        type: "danger",
+      });
       console.error(err);
     }
   }
@@ -55,7 +67,7 @@ function ProductDetailsPage() {
       }
     }
     getProduct(PRODUCTS_URL + productId);
-  }, []);
+  }, [user]);
   return (
     <>
       <Modal
@@ -69,7 +81,7 @@ function ProductDetailsPage() {
         }}
         className=" w-1/2 max-w-lg"
       >
-        <div className=" min-h-full w-full flex flex-col gap-2 justify-center flex-wrap overflow-hidden px-4 mt-12">
+        <div className="w-full flex flex-col gap-2 justify-center flex-wrap overflow-hidden min-h-400 p-4 md:p-8 break-950px:px-12">
           <img
             src="https://dummyimage.com/400x200"
             alt="Placeholder Image"
@@ -84,12 +96,13 @@ function ProductDetailsPage() {
               })}
             </ul>
           </div>
-          <div className=" flex justify-end relative">
+          <div
+            className={`${
+              allowDelete.current === true ? " justify-between" : "justify-end"
+            } flex items-end relative`}
+          >
             {allowDelete.current === true && (
-              <Button
-                onClick={handleDeleteItem}
-                className="absolute left-0 hover:animate-pulse text-red-500"
-              >
+              <Button onClick={handleDeleteItem} danger>
                 Delete Product
               </Button>
             )}
@@ -99,6 +112,7 @@ function ProductDetailsPage() {
           </div>
         </div>
       </Modal>
+      {snackBar.display && <SnackBar />}
     </>
   );
 }

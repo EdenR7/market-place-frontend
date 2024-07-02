@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useRef, useState } from "react";
 import { formatJWTTokenToUser } from "../utils/util";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const USER_URL = "http://localhost:3000/api/user/";
 
 export const UserContext = createContext({
@@ -17,6 +18,7 @@ export const UserContext = createContext({
 });
 
 export function UserContextProvider({ children }) {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const userToken = useRef(localStorage.getItem("userToken"));
 
@@ -29,8 +31,15 @@ export function UserContextProvider({ children }) {
       });
       setUser(res.data);
     } catch (err) {
+      const { error } = err.response.data;
+      if (error === "Invalid token") {
+        localStorage.removeItem("userToken");
+        logoutUser();
+        navigate("/user/setup");
+        console.log("Token Expires");
+        return;
+      }
       console.error(err);
-      throw err;
     }
   }
   // async function getUserById(id) {
